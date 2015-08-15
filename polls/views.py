@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.db.models import Count
 
 from .models import Question, Choice
 
@@ -14,13 +15,14 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        return Question.objects.annotate(num_choices=Count('choice'))   \
+            .filter(num_choices__gt=0).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
 class DetailsView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
-    
+
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
@@ -28,6 +30,9 @@ class DetailsView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
+    def get_queryset(self):
+        return Question.objects.annotate(num_answers=Count('choice')).filter(num_answers__gt=0)
 
 
 def vote(request, question_id):
