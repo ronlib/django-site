@@ -1,3 +1,6 @@
+"""
+This module implements the view of the polls application.
+"""
 from django.utils import timezone
 
 from django.http import HttpResponseRedirect
