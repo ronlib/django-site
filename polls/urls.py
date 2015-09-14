@@ -2,6 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'^test/$', views.test, name='test'),
     # ex: /polls/
     url(r'^$', views.IndexView.as_view(), name='index'),
     # ex: /polls/5/

@@ -52,3 +52,7 @@ def vote(request, question_id):
         selected_choice.save()
 
     return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+
+def test(request):
+    print 'bla'
+    return render(request, 'polls/test.html', {})

@@ -10,18 +10,18 @@
 
   <body>
     {% block topbar %}
-    <nav class="navbar navbar-default">
-      <div class="container">
-	<div class="containter-fluid">
-	  <div class="navbar-header">
-	    <ul class="nav nav-tabs">
-	      <li role="presentation" class="active"><a href="{% url 'polls:index' %}">Home</a></li>
-	      <li role="presentation"><a href="#">Bla</a></li>
-	    </ul>
+      <nav class="navbar navbar-default">
+	<div class="container">
+	  <div class="containter-fluid">
+	    <div class="navbar-header">
+	      <ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="{% url 'polls:index' %}">Home</a></li>
+		<li role="presentation"><a href="#">Bla</a></li>
+	      </ul>
+	    </div>
 	  </div>
 	</div>
-      </div>
-    </nav>
+      </nav>
     {% endblock %}
 
     <div class="container">
@@ -29,5 +29,6 @@
       {% endblock %}
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'polls/bootstrap/js/bootstrap.min.js' %}"></script>
   </body>
