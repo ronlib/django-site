@@ -1,4 +1,4 @@
-{% extends "polls/base.html" %}
+{% extends "polls/base.djhtml" %}
 
 {% block content %}
 
@@ -18,7 +18,7 @@
 		</div>
 		<div id="collapse{{forloop.counter}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{forloop.counter}}" aria-expanded="false" style="height: 0px;">
 			<div class="panel-body">
-				{% include "polls/detail_inside.html" %}
+				{% include "polls/detail_inside.djhtml" %}
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,6 @@
+{% extends "polls/base.djhtml" %}
+
+{% block content %}
+
+{% include "polls/detail_inside.djhtml" %}
+{% endblock %}

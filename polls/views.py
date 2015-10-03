@@ -13,7 +13,7 @@ from .models import Question, Choice
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'polls/index.djhtml'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -24,7 +24,7 @@ class IndexView(generic.ListView):
 
 class DetailsView(generic.DetailView):
     model = Question
-    template_name = 'polls/detail.html'
+    template_name = 'polls/detail.djhtml'
 
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
@@ -32,7 +32,7 @@ class DetailsView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = 'polls/results.html'
+    template_name = 'polls/results.djhtml'
 
     def get_queryset(self):
         return Question.objects.annotate(num_answers=Count('choice')).filter(num_answers__gt=0)
@@ -44,7 +44,7 @@ def vote(request, question_id):
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExit):
         # Redisplay the form
-        return render(request, 'polls/detail.html', {
+        return render(request, 'polls/detail.djhtml', {
             'question': p, 'error_message': "You didn't select a choice"
         })
     else:
@@ -55,4 +55,4 @@ def vote(request, question_id):
 
 def test(request):
     print 'bla'
-    return render(request, 'polls/test.html', {})
+    return render(request, 'polls/test.djhtml', {})
