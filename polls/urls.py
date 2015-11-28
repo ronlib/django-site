@@ -1,8 +1,9 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
     url(r'^test/$', views.test, name='test'),
+    url(r'^', include('django.contrib.auth.urls')),
     # ex: /polls/
     url(r'^$', views.IndexView.as_view(), name='index'),
     # ex: /polls/5/
