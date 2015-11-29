@@ -15,6 +15,16 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Question, Choice
 
 
+class AuthView(generic.View):
+    template_name = 'polls/login.djhtml'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['auth_form'] = AuthenticationForm()
+        return context
+    
+
+
 class IndexView(generic.ListView):
     template_name = 'polls/index.djhtml'
     context_object_name = 'latest_question_list'
@@ -23,11 +33,6 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Question.objects.annotate(num_choices=Count('choice'))   \
             .filter(num_choices__gt=0).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['auth_form'] = AuthenticationForm()
-        return context
 
 
 class DetailsView(generic.DetailView):

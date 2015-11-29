@@ -1,0 +1,11 @@
+{% extends "polls/base.djhtml" %}
+
+{% block content  %}
+
+<div class="nav navbar-right">
+	{% if auth_form %}
+		{{auth_form.as_ul}}
+	{% endif %}
+</div>
+
+{% endblock %}

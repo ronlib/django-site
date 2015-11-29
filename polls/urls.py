@@ -1,9 +1,11 @@
 from django.conf.urls import url, include
+import django
 from . import views
 
 urlpatterns = [
     url(r'^test/$', views.test, name='test'),
     url(r'^', include('django.contrib.auth.urls')),
+    url(r'^login/$', )
     # ex: /polls/
     url(r'^$', views.IndexView.as_view(), name='index'),
     # ex: /polls/5/

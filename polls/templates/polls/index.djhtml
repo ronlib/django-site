@@ -2,8 +2,6 @@
 
 {% block content %}
 
-	<h1>Authenticate:</h1>
-	
 <h1>Questions</h1>
 
 {% if latest_question_list %}
