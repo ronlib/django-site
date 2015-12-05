@@ -11,6 +11,7 @@ from django.views import generic
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import auth
 
 from .models import Question, Choice
 
@@ -22,7 +23,6 @@ class AuthView(generic.View):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['auth_form'] = AuthenticationForm()
         return context
-    
 
 
 class IndexView(generic.ListView):
@@ -32,7 +32,8 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Question.objects.annotate(num_choices=Count('choice'))   \
-            .filter(num_choices__gt=0).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+            .filter(num_choices__gt=0).filter(pub_date__lte=timezone.now()).\
+            order_by('-pub_date')[:5]
 
 
 class DetailsView(generic.DetailView):
@@ -74,3 +75,11 @@ def get_user(request):
 def test(request):
     print 'bla'
     return render(request, 'polls/test.djhtml', {})
+
+def login(request, *args, **kwargs):
+    template_response = auth.views.login(request, *args, **kwargs)
+
+    if isinstance(template_response, HttpResponseRedirect):
+        return HttpResponseRedirect(reverse('polls:index'))
+    else:
+        return template_response

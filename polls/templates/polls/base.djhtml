@@ -16,13 +16,17 @@
 						<div class="navbar-header">
 							<ul class="nav nav-tabs">
 								<li role="presentation" class="active"><a href="{% url 'polls:index' %}">Home</a></li>
-								<li role="presentation"><a href="#">Bla</a></li>
+								<li role="presentation"><a href="{% url 'polls:about' %}">About</a></li>
 							</ul>
 						</div>
 						<div class="nav navbar-right">
-							{% if auth_form %}
-								{{auth_form.as_ul}}
-							{% endif %}
+						{% if not user.is_authenticated %}
+							<p><a href="{% url 'polls:login' %}">Login</a></p>
+						{% else %}
+							{{ user.username }}
+							<p><a href="{% url 'polls:logout' %}">Logout</a></p>
+						{% endif %}
+						
 						</div>
 					</div>
 				</div>

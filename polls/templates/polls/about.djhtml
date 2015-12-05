@@ -1,0 +1,7 @@
+{% extends "polls/base.djhtml" %}
+
+{% block content %}
+
+	This site is only for learning purposes.
+	
+{% endblock %}

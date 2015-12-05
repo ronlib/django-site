@@ -1,0 +1,7 @@
+{% extends "polls/base.djhtml" %}
+
+{% block content %}
+	<p> You have logged out! </p>
+
+	<a href="{% url 'polls:login' %}">Login</a>
+{% endblock %}
