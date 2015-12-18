@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"
-			rel="stylesheet" media="screen">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<link href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}" 			
+			rel="stylesheet" media="screen" />
+		<script src="{% static 'polls/bootstrap/js/bootstrap.min.js' %}"></script>
 		<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
 	</head>
 
@@ -20,13 +22,44 @@
 							</ul>
 						</div>
 						<div class="nav navbar-right">
-						{% if not user.is_authenticated %}
-							<p><a href="{% url 'polls:login' %}">Login</a></p>
-						{% else %}
-							{{ user.username }}
-							<p><a href="{% url 'polls:logout' %}">Logout</a></p>
-						{% endif %}
-						
+							{% if not user.is_authenticated %}
+								<!-- Trying using bootstrap's modal -->
+								<a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a>
+
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+											</div>
+											<div class="modal-body">
+												<form method="post" action="{% url 'polls:login' %}">
+													{% csrf_token %}
+													<table>
+														<tr>
+															<td>{{ form.username.label_tag }}</td>
+															<td>{{ form.username }}</td>
+														</tr>
+														<tr>
+															<td>{{ form.password.label_tag }}</td>
+															<td>{{ form.password }}</td>
+														</tr>
+													</table>
+
+													<input type="submit" value="login" />
+													<input type="hidden" name="next" value="{{ next }}" />
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% else %}
+								{{ user.username }}
+								<p><a href="{% url 'polls:logout' %}">Logout</a></p>
+							{% endif %}
+
+
 						</div>
 					</div>
 				</div>

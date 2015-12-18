@@ -9,23 +9,21 @@ from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.db.models import Count
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 
 from .models import Question, Choice
 
 
-class AuthView(generic.View):
-    template_name = 'polls/login.djhtml'
+class AuthMixin(object):
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['auth_form'] = AuthenticationForm()
+        context = super(AuthMixin, self).get_context_data(**kwargs)
+        context['form'] = AuthenticationForm()
         return context
 
 
-class IndexView(generic.ListView):
+class IndexView(AuthMixin, generic.ListView):
     template_name = 'polls/index.djhtml'
     context_object_name = 'latest_question_list'
 
@@ -36,7 +34,7 @@ class IndexView(generic.ListView):
             order_by('-pub_date')[:5]
 
 
-class DetailsView(generic.DetailView):
+class DetailsView(AuthMixin, generic.DetailView):
     model = Question
     template_name = 'polls/detail.djhtml'
 
@@ -44,12 +42,26 @@ class DetailsView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(generic.DetailView):
+class ResultsView(AuthMixin, generic.DetailView):
     model = Question
     template_name = 'polls/results.djhtml'
 
     def get_queryset(self):
-        return Question.objects.annotate(num_answers=Count('choice')).filter(num_answers__gt=0)
+        return Question.objects.annotate(
+            num_answers=Count('choice')).filter(num_answers__gt=0)
+
+
+class LoginTemplateView(AuthMixin, generic.TemplateView):
+    pass
+
+
+def logout(request, *args, **kwargs):
+
+    extra_context = {'form': AuthenticationForm()}
+    response = auth.views.logout(request,
+                                 template_name='registration/logout.djhtml',
+                                 extra_context=extra_context, *args, **kwargs)
+    return response
 
 
 def vote(request, question_id):

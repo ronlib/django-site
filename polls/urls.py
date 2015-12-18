@@ -1,6 +1,4 @@
 from django.conf.urls import url, include
-from django.views.generic import TemplateView
-from django.core.urlresolvers import reverse
 
 from . import views
 
@@ -8,9 +6,7 @@ urlpatterns = [
     url(r'^test/$', views.test, name='test'),
     url(r'^login/$', views.login,
         {'template_name': 'registration/login.djhtml'}, name='login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout',
-        {'template_name': 'registration/logout.djhtml'},
-        name='logout'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^', include('django.contrib.auth.urls'),
         {'template_name': 'registration/login.djhtml'}),
     # ex: /polls/
@@ -22,6 +18,6 @@ urlpatterns = [
         name='results'),
     # ex: /polls/5/vote/
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-    url(r'^about/$', TemplateView.as_view(template_name='polls/about.djhtml'),
-        name='about'),
+    url(r'^about/$', views.LoginTemplateView.as_view(
+        template_name='polls/about.djhtml'), name='about'),
 ]
