@@ -79,10 +79,6 @@ def vote(request, question_id):
 
     return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
-def get_user(request):
-    # if request.method == 'POST':
-    #     form = User.
-    pass
 
 def test(request):
     print 'bla'
