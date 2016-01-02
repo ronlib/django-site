@@ -84,10 +84,24 @@ def test(request):
     print 'bla'
     return render(request, 'polls/test.djhtml', {})
 
-def login(request, *args, **kwargs):
-    template_response = auth.views.login(request, *args, **kwargs)
 
-    if isinstance(template_response, HttpResponseRedirect):
-        return HttpResponseRedirect(reverse('polls:index'))
-    else:
-        return template_response
+def login(request, *args, **kwargs):
+    template_response = auth.views.login(request,  *args, **kwargs)
+
+    # if isinstance(template_response, HttpResponseRedirect):
+    #     return HttpResponseRedirect(kwargs['next'])
+    # else:
+    #     return template_response
+
+    return template_response
+
+
+class QuestionSubmit(generic.CreateView):
+    model = Question
+
+    fields = ['question_text']
+
+# @login_required
+# def submit_question(request, *args, **kwargs):
+
+#     pass
