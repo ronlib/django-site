@@ -1,14 +1,17 @@
 {% extends "polls/base.djhtml" %}
+{% load staticfiles %}
 
 {% block content %}
-		<form method="post" action="{% url 'polls:add_question' %}">
+		<form method="post" action="{% url 'polls:add_question' %}" >
 				{% csrf_token %}
-				<table>
+				<table id="new_question_answers_table">
 						{{ form.as_table }}
-						<tr>
-								<td>Option 1:</td>
-								<td><input type="text" name="option1" id="id_question1" /></td>
-						</tr>
+						<div id="id_question1" >
+								<tr>
+										<td>Option 1:</td>
+										<td><input type="text" name="option1" /></td>
+								</tr>
+						</div>
 				</table>
 		</form>
 
