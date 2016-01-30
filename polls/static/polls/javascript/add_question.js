@@ -9,8 +9,8 @@ function addOption() {
 		// One of the elements is the question text
 		numberOfInputs = formTable.getElementsByTagName('input').length - 1;
 
-		newOption = document.getElementById('id_question1').cloneNode();
-		newOption.getElementsByTagName('td')[0] =
+		newOption = document.getElementById('id_question1').cloneNode(true);
+		newOption.getElementsByTagName('td')[0].innerText =
 				'Option ' + (numberOfInputs + 1).toString();
 		newOptionInput = newOption.getElementsByTagName('input')[0];
 		newOptionInput.type = 'text';

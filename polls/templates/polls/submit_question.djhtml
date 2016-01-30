@@ -6,12 +6,10 @@
 				{% csrf_token %}
 				<table id="new_question_answers_table">
 						{{ form.as_table }}
-						<div id="id_question1" >
-								<tr>
-										<td>Option 1:</td>
-										<td><input type="text" name="option1" /></td>
-								</tr>
-						</div>
+						<tr id="id_question1">
+								<td>Option 1:</td>
+								<td><input type="text" name="option1" /></td>
+						</tr>
 				</table>
 		</form>
 
