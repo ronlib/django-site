@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -20,4 +21,6 @@ urlpatterns = [
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
     url(r'^about/$', views.LoginTemplateView.as_view(
         template_name='polls/about.djhtml'), name='about'),
+    url('^question', login_required(views.QuestionSubmit.as_view(
+        template_name="polls/submit_question.djhtml")), name='add_question'),
 ]

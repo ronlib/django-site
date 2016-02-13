@@ -1,0 +1,26 @@
+{% extends "polls/base.djhtml" %}
+{% load staticfiles %}
+
+{% block content %}
+		<form method="post" action="{% url 'polls:add_question' %}" id="newQuestion">
+				{% csrf_token %}
+				<div class="form-group">
+						<label for="inputQuestion" class="col-sm-2 control-label">Question</label>
+						<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputQuestion" placeholder="Question">
+						</div>
+				</div>
+
+				<div class="answer-template hidden" >
+						<div class="form-group">
+								<label for="answerText" class="col-sm-2 control-label">Answer</label>
+								<div class="col-sm-10">
+										<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(this)">
+								</div>
+						</div>
+				</div>
+
+				<script>addOption()</script>
+		</form>
+
+{% endblock %}

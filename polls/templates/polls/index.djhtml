@@ -4,6 +4,8 @@
 
 <h1>Questions</h1>
 
+<a class="btn btn-default" href="{% url 'polls:add_question' %}">Add a question! </a>
+
 {% if latest_question_list %}
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -30,5 +32,3 @@
 {% endif %}
 
 {% endblock %}
-
-
