@@ -19,31 +19,30 @@ function addOption() {
 
 		formTable.appendChild(newOption);
 }
-+
-+
-+function isNextOptionFilled(obj) {
-+
-+		if (obj.value) {
-+				addOption();
-+		}
-+		else {
-+				// We should remove the next option, if it is not empty
-+				obj.parentElement().parentElement();
-+		}
-+
-+}
-+
-+function getNextQuestion(obj) {
-+		parentTr = $(obj.parentElement.parentElement);
-+		if (parentTr.siblings().length == parentTr.index()) {
-+				// Last element
-+				return nil;
-+		}
-+		else {
-+				nextTr = parentTr.parent().children()[parentTr.index()+1];
-+				if (!nextTr.value) {
-+						nextTr.remove();
-+				}
-+
-+		}
-+}
+
+
+function isNextOptionFilled(obj) {
+
+		if (obj.value) {
+				addOption();
+		}
+		else {
+				// We should remove the next option, if it is not empty
+				obj.parentElement().parentElement();
+		}
+
+}
+
+function getNextQuestion(obj) {
+		parentTr = $(obj.parentElement.parentElement);
+		if (parentTr.siblings().length == parentTr.index()) {
+				// Last element
+				return nil;
+		}
+		else {
+				nextTr = parentTr.parent().children()[parentTr.index()+1];
+				if (!nextTr.value) {
+						nextTr.remove();
+				}
+		}
+}
