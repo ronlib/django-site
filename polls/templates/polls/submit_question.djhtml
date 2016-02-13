@@ -8,7 +8,7 @@
 						{{ form.as_table }}
 						<tr id="id_question1" type="question">
 								<td>Option 1:</td>
-								<td><input type="text" name="option1" onchange="handleInputChange(this)" /></td>
+								<td><input type="text" name="option1" oninput="handleInputChange(this)" /></td>
 						</tr>
 				</table>
 		</form>
