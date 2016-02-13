@@ -2,15 +2,25 @@
 {% load staticfiles %}
 
 {% block content %}
-		<form method="post" action="{% url 'polls:add_question' %}" >
+		<form method="post" action="{% url 'polls:add_question' %}" id="newQuestion">
 				{% csrf_token %}
-				<table id="new_question_answers_table">
-						{{ form.as_table }}
-						<tr id="id_question1" type="question">
-								<td>Option 1:</td>
-								<td><input type="text" name="option1" oninput="handleInputChange(this)" /></td>
-						</tr>
-				</table>
+				<div class="form-group">
+						<label for="inputQuestion" class="col-sm-2 control-label">Question</label>
+						<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputQuestion" placeholder="Question">
+						</div>
+				</div>
+
+				<div class="answer-template hidden" >
+						<div class="form-group">
+								<label for="answerText" class="col-sm-2 control-label">Answer</label>
+								<div class="col-sm-10">
+										<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(obj)">
+								</div>
+						</div>
+				</div>
+
+				<script>addOption()</script>
 		</form>
 
 {% endblock %}
