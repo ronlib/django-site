@@ -15,7 +15,7 @@
 						<div class="form-group">
 								<label for="answerText" class="col-sm-2 control-label">Answer</label>
 								<div class="col-sm-10">
-										<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(obj)">
+										<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(this)">
 								</div>
 						</div>
 				</div>

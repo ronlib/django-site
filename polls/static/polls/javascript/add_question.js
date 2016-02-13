@@ -27,8 +27,8 @@ function addOption() {
 
 		var newOption = $(".answer-template").children()[0].cloneNode(true);
 
-		$(newOption).find("label")[0].attributes["for"] = 'answerText' + this.questionCount.toString();
-		$(newOption).find("input")[0].attributes["id"] = 'answerText' + this.questionCount.toString();
+		$(newOption).find("label").attr("for", 'answerText' + this.questionCount.toString());
+		$(newOption).find("input").attr("id", 'answerText' + this.questionCount.toString());
 
 		++this.questionCount;
 		$("#newQuestion")[0].appendChild(newOption);
@@ -39,7 +39,7 @@ function addOption() {
 
 function isLastInput(obj) {
 
-		if (obj.siblings().length == obj.index()) {
+		if ($(obj).siblings().length == $(obj).index()) {
 				return true;
 		}
 
@@ -48,15 +48,15 @@ function isLastInput(obj) {
 
 function handleInputChange(obj) {
 
-		// var form-group = $(obj).parent(".form-group");
+		var formGroup = $(obj).parents(".form-group");
 
-		if (obj.value && isLastInput(form-group)) {
+		if (obj.value && isLastInput(formGroup)) {
 				addOption();
 		}
-		else if (!isLastInput(form-group) && !obj.value) {
+		else if (!isLastInput(formGroup) && !obj.value) {
 				// We should remove the next option, if it is not empty
-				$(form-group.parent().children()[form-group.index()-1]).find("input")[0].focus();
-				form-group.remove();
+				$(formGroup.parent().children()[formGroup.index()-1]).find("input")[0].focus();
+				formGroup.remove();
 		}
 
 }
