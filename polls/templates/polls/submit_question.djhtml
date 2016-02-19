@@ -10,17 +10,17 @@
 								<input type="text" class="form-control" id="inputQuestion" placeholder="Question">
 						</div>
 				</div>
+		</form>
 
-				<div class="answer-template hidden" >
-						<div class="form-group">
-								<label for="answerText" class="col-sm-2 control-label">Answer</label>
-								<div class="col-sm-10">
-										<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(this)">
-								</div>
+		<div class="answer-template hidden" >
+				<div class="form-group">
+						<label for="answerText" class="col-sm-2 control-label">Answer</label>
+						<div class="col-sm-10">
+								<input type="text" class="form-control" id="answerText" placeholder="Answer" oninput="handleInputChange(this)">
 						</div>
 				</div>
+		</div>
 
-				<script>addOption()</script>
-		</form>
+		<script>window.onload = addOption()</script>
 
 {% endblock %}
