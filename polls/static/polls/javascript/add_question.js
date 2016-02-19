@@ -14,13 +14,14 @@ function addOption() {
 		$(newOption).find("input").attr("id", 'answerText' + this.questionCount.toString());
 
 		++this.questionCount;
-		$("#newQuestion")[0].appendChild(newOption);
+		$("#newQuestion")[0].insertBefore(newOption, $("#newQuestion").find("button").parents(".form-group")[0]);
 
 }
 
 function isLastInput(obj) {
 
-		if ($(obj).siblings().length == $(obj).index()) {
+		// The button is another sibling, so the last input has the conditioned index
+		if ($(obj).siblings().length - 1 == $(obj).index()) {
 				return true;
 		}
 
