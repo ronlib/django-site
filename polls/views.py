@@ -11,8 +11,10 @@ from django.views import generic
 from django.db.models import Count
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 from .models import Question, Choice
+from .forms import QuestionChoiceFormset, QuestionForm
 
 
 class AuthMixin(object):
@@ -96,10 +98,21 @@ def login(request, *args, **kwargs):
     return template_response
 
 
-class QuestionSubmit(generic.CreateView):
-    model = Question
+# class QuestionSubmit(generic.CreateView):
+#     model = Question
 
-    fields = ['question_text']
+#     fields = ['question_text']
+
+# @login_required
+def addQuestion(request):
+
+    if request.method == "GET":
+        question = Question()
+        formset = QuestionChoiceFormset(instance=question)
+        return render(request, "polls/submit_question.djhtml",
+                          context={"formset":formset,
+                                       'form':QuestionForm(instance=question)})
+
 
 # @login_required
 # def submit_question(request, *args, **kwargs):
