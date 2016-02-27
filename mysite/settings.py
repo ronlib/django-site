@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'django_bootstrap_dynamic_formsets',
     'polls',
 )
 
@@ -102,6 +103,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static')
+# STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static')
+STATICFILES_DIRS = [
+    os.path.join(os.path.dirname(__file__), '..', 'static'),
+    ]
 
 LOGIN_URL = '/polls/login'

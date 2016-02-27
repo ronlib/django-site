@@ -3,14 +3,15 @@
 
 {% block content %}
 		{% load bootstrap3 %}
+		{% load bootstrap_dynamic_formsets %}
 		{% bootstrap_javascript %}
 
 		{% bootstrap_messages %}
 
-		<form action="bla" method="post" class="form" >
+		<form action="{% url 'polls:add_question' %}" method="post" class="form" >
 				{% csrf_token %}
 				{% bootstrap_form form%}
-				{% bootstrap_formset formset %}
+				{% bootstrap_dynamic_formset formset can_order=True can_delete=True layout="horizontal" %}
 				{% buttons %}
 				<button type="submit" class="btn btn-primary">
 						{% bootstrap_icon "star" %} Submit

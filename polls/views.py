@@ -2,6 +2,8 @@
 """
 This module implements the view of the polls application.
 """
+from datetime import datetime
+
 from django.utils import timezone
 
 from django.http import HttpResponseRedirect
@@ -112,7 +114,22 @@ def addQuestion(request):
         return render(request, "polls/submit_question.djhtml",
                           context={"formset":formset,
                                        'form':QuestionForm(instance=question)})
+    elif request.method == 'POST':
+        questionForm = QuestionForm(request.POST)
+        if questionForm.is_valid():
+            question = questionForm.save(commit=False)
+            question.pub_date = datetime.now()
+            question.submitter = request.user
+            question.save()
 
+            formset = QuestionChoiceFormset(request.POST, request.FILES)
+            if formset.is_valid():
+                for form in formset:
+                    choice = form.save(commit=False)
+                    choice.question = question
+                    choice.save()
+
+        return HttpResponseRedirect(reverse('polls:index'))
 
 # @login_required
 # def submit_question(request, *args, **kwargs):
