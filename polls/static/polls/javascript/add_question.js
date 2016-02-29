@@ -46,3 +46,7 @@ function handleInputChange(obj) {
 function getNextTr(obj) {
 		return parentTr.parent().children()[parentTr.index()+1];
 }
+
+function backButtonClick() {
+		window.history.back();
+}

@@ -90,6 +90,7 @@ def test(request):
 
 
 def login(request, *args, **kwargs):
+
     template_response = auth.views.login(request,  *args, **kwargs)
 
     # if isinstance(template_response, HttpResponseRedirect):

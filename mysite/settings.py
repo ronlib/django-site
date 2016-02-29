@@ -109,3 +109,4 @@ STATICFILES_DIRS = [
     ]
 
 LOGIN_URL = '/polls/login'
+LOGIN_REDIRECT_URL = '/polls'

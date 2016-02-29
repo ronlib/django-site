@@ -16,7 +16,9 @@
 				<button type="submit" class="btn btn-primary">
 						{% bootstrap_icon "star" %} Submit
 				</button>
+				<button class="btn btn-default" onclick="backButtonClick();">Back</button>
 				{% endbuttons %}
 		</form>
+
 
 {% endblock %}
