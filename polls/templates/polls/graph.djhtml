@@ -1,0 +1,11 @@
+{% extends "polls/base.djhtml" %}
+{% load staticfiles %}
+{% block content %}
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+
+	<div id="container" style="height: 300px"></div>
+	<div id="report"></div>
+
+	<script src="{% static 'polls/graph.js' %}"></script>
+
+{%endblock%}
